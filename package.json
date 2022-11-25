@@ -1,0 +1,15 @@
+{
+  "name": "json-encrypt",
+  "version": "0.0.1",
+  "description": "A simple JSON data encryption data designed to avoid others to get your datas.",
+  "main": "index.js",
+  "scripts": {
+    "test": "test.js"
+  },
+  "keywords": [
+    "JSON encryption",
+    "data encryption"
+  ],
+  "author": "RyannKim327",
+  "license": "ISC"
+}

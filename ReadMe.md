@@ -5,13 +5,13 @@
 
 ### How to install (NodeJS):
 ```Bash
-npm i json-encrypt@latest
+npm i json-enc-dec@latest
 ```
 
 ### How to encrypt (NodeJS): .encrypt(jsonData, isFile)
 ```NodeJS
 const fs = require("fs")
-const json = require("json-encrypt")
+const json = require("json-enc-dec")
 
 // Non-file
 console.log(json.encrypt({
@@ -29,7 +29,7 @@ console.log(json.encrypt(file, false))
 ---
 ### How to decrypt (NodeJS): .decrypt(encryptedData)
 ```NodeJS
-const json = require("json-encrypt")
+const json = require("json-enc-dec")
 
 console.log(json.decrypt("691f61525e5h5d561f311f3f565d5d5g1d4b5g605d551f6b))
 ```
@@ -40,7 +40,7 @@ console.log(json.decrypt("691f61525e5h5d561f311f3f565d5d5g1d4b5g605d551f6b))
 ```
 > This output is already in json objest, so that you may call it like:
 ```NodeJS
-const json = require("json-encrypt")
+const json = require("json-enc-dec")
 
 console.log(json.decrypt("691f61525e5h5d561f311f3f565d5d5g1d4b5g605d551f6b).sample)
 ```

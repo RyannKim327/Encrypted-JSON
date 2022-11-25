@@ -1,5 +1,5 @@
 {
-  "name": "json-encrypt",
+  "name": "json-enc-dec",
   "version": "0.0.1",
   "description": "A simple JSON data encryption data designed to avoid others to get your datas.",
   "main": "index.js",
@@ -11,5 +11,13 @@
     "data encryption"
   ],
   "author": "RyannKim327",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RyannKim327/Encrypted-JSON.git"
+  },
+  "bugs": {
+    "url": "https://github.com/RyannKim327/Encrypted-JSON/issues"
+  },
+  "homepage": "https://github.com/RyannKim327/Encrypted-JSON#readme"
 }

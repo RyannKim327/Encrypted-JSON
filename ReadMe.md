@@ -20,7 +20,7 @@ npm install json-enc-dec@latest
 ## Usage
 
 ### 1. Basic Encryption
-Encrypt your JSON data into a pseudo-string format suitable for transmission or storage.
+Encrypt your JSON data into a pseudo-string format. Note that the key must be at least **3 characters** long.
 
 ```typescript
 import { encrypt } from 'json-enc-dec';
@@ -32,39 +32,58 @@ const data = {
 };
 const key = "my-secret-vault-key";
 
-// Result is a string by default
+// Result is a pseudo-string by default
 const encrypted = encrypt(data, key);
 console.log('Encrypted Data:', encrypted);
 ```
 
 ### 2. Decryption
-Restore your encrypted data back to its original JSON form.
+Restore your encrypted data back to its original JSON form. `decrypt` accepts either a `Buffer` or a `string` (representing a file path).
 
 ```typescript
 import { decrypt } from 'json-enc-dec';
 
 const key = "my-secret-vault-key";
-const buffer = Buffer.from(encryptedData); // Ensure you have the data as a Buffer
 
-const original = decrypt(buffer, key);
-console.log('Decrypted User:', original.user);
+// If you have a Buffer
+const originalFromBuffer = decrypt(encryptedBuffer, key);
+
+// If you have a file path
+const originalFromFile = decrypt('./data.enc', key);
+
+console.log('Decrypted User:', originalFromBuffer.user);
 ```
 
-### 3. Buffer Output
-If you need raw binary data, you can request a `Buffer` directly from the `encrypt` function.
+### 3. Advanced Options (Buffer & Saving)
+You can request a `Buffer` directly or save the result to a file using the `encodeOptions` object.
 
 ```typescript
-const encryptedBuffer = encrypt(data, key, true);
+// Return a Buffer instead of a pseudo-string
+const encryptedBuffer = encrypt(data, key, { returnBuffer: true });
+
+// Save directly to a file (saves as pseudo-string)
+encrypt(data, key, { saveTo: './data.enc' });
+```
+
+### 4. Error Handling
+Both `encrypt` and `decrypt` will return an object containing an `error` property if something goes wrong.
+
+```typescript
+const result = encrypt(data, "12"); 
+// result: { error: "The key must at least 3 characters" }
+
+const decrypted = decrypt(corruptedBuffer, key);
+// decrypted: { error: "Data cannot be parse", data: "..." }
 ```
 
 ## How It Works
 
-The library stringifies your JSON input and converts it into a binary Buffer. It then iterates through each byte, performing a bitwise XOR operation against the bytes of your provided key. If the key is shorter than the data, it wraps around and repeats.
+The library stringifies your JSON input and converts it into a binary Buffer. It then iterates through each byte, performing a bitwise XOR operation against the bytes of your provided key.
 
 1. **Input**: `JSON Object/Array`
-2. **Key**: `User-defined string`
+2. **Key**: `User-defined string` (min. 3 chars)
 3. **Logic**: `Data[i] ^ Key[i % Key.length]`
-4. **Output**: `Pseudo-string` (readable characters representing bytes) or `Buffer`.
+4. **Output**: `Pseudo-string` (characters mapped 1:1 to bytes), `Buffer`, or a saved file.
 
 ## Changelog & History
 

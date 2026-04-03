@@ -9,6 +9,11 @@ const buffertoPseudo = (buffer: Buffer) => {
 
 export function encrypt(data: json | json[], key: string, opts: encodeOptions | undefined | null) {
 	// TODO: To initally buffer or convert from string to buffered text
+	if (key.length <= 3) {
+		return {
+			"error": "The key must at least 3 characters"
+		}
+	}
 	const jsonText = JSON.stringify(data)
 	const buff = Buffer.from(jsonText, "utf8")
 	const keyBuff = Buffer.from(key, "utf8")
@@ -35,6 +40,11 @@ export function encrypt(data: json | json[], key: string, opts: encodeOptions | 
 }
 
 export function decrypt(fileOrBuffer: Buffer | string, key: string) {
+	if (key.length <= 3) {
+		return {
+			"error": "The key must at least 3 characters"
+		}
+	}
 	let data = fileOrBuffer
 	if (typeof (data) === "string") {
 		data = readFileSync(fileOrBuffer)

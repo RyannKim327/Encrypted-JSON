@@ -1,4 +1,5 @@
-import { json } from "./interface";
+import { readFileSync, writeFileSync } from "fs";
+import { encodeOptions, json } from "./interface";
 
 const buffertoPseudo = (buffer: Buffer) => {
 	return Array.from(buffer)
@@ -6,7 +7,7 @@ const buffertoPseudo = (buffer: Buffer) => {
 		.join('');
 }
 
-export function encrypt(data: json | json[], key: string, returnBuffer = false) {
+export function encrypt(data: json | json[], key: string, opts: encodeOptions | undefined | null) {
 	// TODO: To initally buffer or convert from string to buffered text
 	const jsonText = JSON.stringify(data)
 	const buff = Buffer.from(jsonText, "utf8")
@@ -20,11 +21,25 @@ export function encrypt(data: json | json[], key: string, returnBuffer = false) 
 		cipherBuff[i] = buff[i] ^ keyBuff[i % keyBuff.length];
 	}
 
-	if (returnBuffer) return cipherBuff;
+	// TODO: To save as file
+	if (opts !== undefined) {
+		if (opts?.saveTo) {
+			if (opts?.saveTo?.trim().length > 0) {
+				writeFileSync(opts.saveTo, buffertoPseudo(cipherBuff))
+			}
+		}
+
+		if (opts?.returnBuffer) return cipherBuff;
+	}
 	return buffertoPseudo(cipherBuff);
 }
 
-export function decrypt(data: Buffer, key: string) {
+export function decrypt(fileOrBuffer: Buffer | string, key: string) {
+	let data = fileOrBuffer
+	if (typeof (data) === "string") {
+		data = readFileSync(fileOrBuffer)
+	}
+
 	const keyBuff = Buffer.from(key, "utf8")
 	const buff = Buffer.alloc(data.length)
 

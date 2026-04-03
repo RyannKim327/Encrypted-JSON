@@ -5,6 +5,7 @@
   "main": "dist/index.js",
   "module": "NodeNext",
   "scripts": {
+    "build": "tsc",
     "test": "tsx test"
   },
   "keywords": [

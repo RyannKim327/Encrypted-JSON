@@ -1,6 +1,6 @@
 {
   "name": "json-enc-dec",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A simple JSON data encryption data designed to avoid others to get your datas.",
   "main": "dist/index.js",
   "module": "NodeNext",

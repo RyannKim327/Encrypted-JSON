@@ -1,4 +1,4 @@
-import { Buffer } from "buffer";
+import { Buffer } from "buffer"
 import { readFileSync, writeFileSync } from "fs";
 import { encodeOptions, json } from "./interface";
 

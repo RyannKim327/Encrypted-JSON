@@ -87,6 +87,9 @@ The library stringifies your JSON input and converts it into a binary Buffer. It
 
 ## Changelog & History
 
+### v0.1.1 (April 5, 2026)
+- **Refined Options API**: Improved TypeScript definition for `encodeOptions` by using optional properties (`?`) instead of union types (`null | undefined`).
+
 ### v0.1.0 (April 4, 2026)
 - **Official Release**: "Idea officially implemented after 4 years."
 - **Full Refactor**: Complete migration from JavaScript to TypeScript.

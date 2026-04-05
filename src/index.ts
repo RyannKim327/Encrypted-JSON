@@ -8,7 +8,7 @@ const buffertoPseudo = (buffer: Buffer) => {
 		.join('');
 }
 
-export function encrypt(data: json | json[], key: string, opts: encodeOptions | undefined | null) {
+export function encrypt(data: json | json[], key: string, opts?: encodeOptions) {
 	// TODO: To initally buffer or convert from string to buffered text
 	if (key.length <= 3) {
 		return {
